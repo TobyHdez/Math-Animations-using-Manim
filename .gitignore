@@ -1,0 +1,7 @@
+﻿# Rendered output (too large; regenerate with the scripts)
+media/
+*.mp4
+
+# Python
+__pycache__/
+*.pyc
