@@ -5,3 +5,6 @@ media/
 # Python
 __pycache__/
 *.pyc
+
+# Algebra benchmark question images (copied from the teacher test; keep out of the public repo)
+algebra/q/

@@ -1,7 +1,9 @@
-"""Crop every question from the practice-test PDF into benchmark/q/qNN.png (test PDF, no answers)."""
+"""Crop every question from a practice-test PDF into <out dir>/qNN.png.
+Usage: python benchmark/extract_questions.py <test.pdf> [out dir]   (default out dir benchmark/q)"""
 import re, sys, fitz
 
 PDF = sys.argv[1]
+OUT = sys.argv[2] if len(sys.argv) > 2 else "benchmark/q"
 doc = fitz.open(PDF)
 marks = []  # (question number, page index, y_top)
 for pi, page in enumerate(doc):
@@ -19,7 +21,7 @@ for i, (q, pi, y) in enumerate(marks):
         y1 = page.rect.height - 30
     clip = fitz.Rect(30, y0, page.rect.width - 30, y1)
     pix = page.get_pixmap(clip=clip, dpi=170)
-    out = f"benchmark/q/q{q:02d}.png"
+    out = f"{OUT}/q{q:02d}.png"
     pix.save(out)
     from PIL import Image, ImageChops
     im = Image.open(out).convert("RGB")
