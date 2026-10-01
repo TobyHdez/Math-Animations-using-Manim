@@ -40,8 +40,8 @@ class PerpendicularRoad(Scene):
             font_size=30,
         ).to_edge(UP)
 
-        map_img = ImageMobject("images/road_map.png").scale_to_fit_height(4.8)
-        map_img.move_to(LEFT * 4.2 + DOWN * 0.4)
+        map_img = ImageMobject("images/road_map.png").scale_to_fit_height(5.6)
+        map_img.move_to(LEFT * 3.9 + DOWN * 0.5)
         s = map_img.height / MAP_PX_H
 
         def g(gx, gy):
@@ -55,12 +55,12 @@ class PerpendicularRoad(Scene):
         def label_bg(mob):
             return mob.add_background_rectangle(BLACK, opacity=0.65, buff=0.06)
 
-        CX = 2.9
+        CX = 3.4
         EQ_POS = UP * 0.7 + RIGHT * CX
-        STEP_POS = DOWN * 1.3 + RIGHT * CX
+        STEP_POS = DOWN * 1.8 + RIGHT * CX
 
         def caption(text):
-            return Text(text, font_size=26, color=BLUE).move_to(STEP_POS)
+            return Text(text, font_size=22, color=BLUE).move_to(STEP_POS)
 
         self.play(Write(title), FadeIn(map_img))
         self.wait(1)
@@ -123,7 +123,7 @@ class PerpendicularRoad(Scene):
         self.wait(1)
 
         hint = Text("Flip it, then change the sign", font_size=24, color=YELLOW)
-        hint.move_to(DOWN * 0.3 + RIGHT * CX)
+        hint.move_to(DOWN * 0.6 + RIGHT * CX)
         self.play(FadeIn(hint, shift=UP * 0.2))
         num, bar, den = fr
         num_pos, den_pos = num.get_center(), den.get_center()
@@ -176,7 +176,7 @@ class PerpendicularRoad(Scene):
         self.play(ReplacementTransform(cap, cap4))
 
         two = eq1[4].copy().set_color(GREEN)
-        hop_y = UP * 0.5
+        hop_y = UP * 0.9
         self.add(two)
         for target_i, product in [
             (6, "-\\frac{1}{3} \\cdot x = -\\frac{1}{3}x"),
@@ -187,7 +187,7 @@ class PerpendicularRoad(Scene):
                 run_time=0.9,
             )
             result = MathTex(product, color=GREEN).scale(0.9)
-            result.next_to(eq1, UP, buff=1.0)
+            result.next_to(eq1, DOWN, buff=0.4)
             self.play(Indicate(eq1[target_i], color=GREEN), FadeIn(result, shift=DOWN * 0.2))
             self.wait(0.8)
             self.play(FadeOut(result))
@@ -236,14 +236,13 @@ class PerpendicularRoad(Scene):
         self.play(ReplacementTransform(cap5, cap6), FadeOut(labels))
 
         start = Dot(g(1, 0), color=YELLOW, radius=0.09)
-        start_lab = label_bg(MathTex("(1, 0)", color=YELLOW).scale(0.6)).next_to(start, UP, buff=0.12)
-        self.play(FadeIn(start, scale=2), FadeIn(start_lab))
+        self.play(FadeIn(start, scale=2))
 
         # rise first (down 1 for the negative slope), then run right 3
         rise2 = Line(g(1, 0), g(1, -1), color=GREEN, stroke_width=8)
         run2 = Line(g(1, -1), g(4, -1), color=GREEN, stroke_width=8)
-        rise2_lab = label_bg(Text("rise = -1", font_size=20, color=GREEN)).next_to(rise2, LEFT, buff=0.15)
-        run2_lab = label_bg(Text("run = 3", font_size=20, color=GREEN)).next_to(run2, DOWN, buff=0.12)
+        rise2_lab = label_bg(Text("down 1", font_size=20, color=GREEN)).next_to(rise2, LEFT, buff=0.12).shift(DOWN * 0.1)
+        run2_lab = label_bg(Text("right 3", font_size=20, color=GREEN)).next_to(run2, DOWN, buff=0.12)
         self.play(Create(rise2), Write(rise2_lab))
         self.play(Create(run2), Write(run2_lab))
 
@@ -256,7 +255,7 @@ class PerpendicularRoad(Scene):
             "3", "\\cdot", "\\left(-\\tfrac{1}{3}\\right)", "=", "-1",
         ).scale(1.1)
         check_cap = Text("Slopes multiply to -1, so the roads are perpendicular", font_size=22, color=YELLOW)
-        VGroup(check_cap, check).arrange(DOWN, buff=0.3).move_to(DOWN * 2.9 + RIGHT * CX)
+        VGroup(check_cap, check).arrange(DOWN, buff=0.3).move_to(DOWN * 3.1 + RIGHT * CX)
         self.play(FadeIn(check_cap, shift=UP * 0.2), Write(check))
 
         box = SurroundingRectangle(eq3, color=YELLOW, buff=0.2)
