@@ -53,14 +53,14 @@ class PerpendicularRoad(Scene):
             )
 
         def label_bg(mob):
-            return mob.add_background_rectangle(BLACK, opacity=0.65, buff=0.06)
+            return mob.add_background_rectangle(BLACK, opacity=0.85, buff=0.08)
 
         CX = 3.4
         EQ_POS = UP * 0.7 + RIGHT * CX
         STEP_POS = DOWN * 1.8 + RIGHT * CX
 
         def caption(text):
-            return Text(text, font_size=22, color=BLUE).move_to(STEP_POS)
+            return Text(text, font_size=28, color=BLUE).move_to(STEP_POS)
 
         self.play(Write(title), FadeIn(map_img))
         self.wait(1)
@@ -86,15 +86,15 @@ class PerpendicularRoad(Scene):
         p_a, p_b = g(0, 2), g(2, 8)
         dot_a = Dot(p_a, color=YELLOW, radius=0.08)
         dot_b = Dot(p_b, color=YELLOW, radius=0.08)
-        lab_a = label_bg(MathTex("(0, 2)", color=YELLOW).scale(0.6)).next_to(dot_a, RIGHT, buff=0.12)
-        lab_b = label_bg(MathTex("(2, 8)", color=YELLOW).scale(0.6)).next_to(dot_b, RIGHT, buff=0.12)
+        lab_a = label_bg(MathTex("(0, 2)", color=YELLOW).scale(0.85)).next_to(dot_a, LEFT, buff=0.15)
+        lab_b = label_bg(MathTex("(2, 8)", color=YELLOW).scale(0.85)).next_to(dot_b, RIGHT, buff=0.15)
         self.play(FadeIn(dot_a, scale=2), FadeIn(lab_a), FadeIn(dot_b, scale=2), FadeIn(lab_b))
         self.wait(0.5)
 
         rise = Line(p_a, g(0, 8), color=GREEN, stroke_width=8)
         run = Line(g(0, 8), p_b, color=GREEN, stroke_width=8)
-        rise_lab = label_bg(Text("rise = 6", font_size=20, color=GREEN)).next_to(rise, LEFT, buff=0.7)
-        run_lab = label_bg(Text("run = 2", font_size=20, color=GREEN)).next_to(run, UP, buff=0.12)
+        rise_lab = label_bg(Text("rise = 6", font_size=28, color=GREEN)).next_to(rise, LEFT, buff=0.7)
+        run_lab = label_bg(Text("run = 2", font_size=28, color=GREEN)).next_to(run, UP, buff=0.3)
 
         self.play(Create(rise), Write(rise_lab))
         self.play(Write(VGroup(*frac[5:7])))
@@ -113,7 +113,7 @@ class PerpendicularRoad(Scene):
         # ------------------------------------------------------------------
         # Step 2: perpendicular slope = negative reciprocal (flip, change sign)
         # ------------------------------------------------------------------
-        cap = caption("Step 2: Perpendicular slope = negative reciprocal")
+        cap = caption("Step 2: Find the perpendicular slope")
         self.play(FadeIn(cap, shift=UP * 0.2))
 
         lhs = MathTex("m_{\\text{red}}", "=").scale(1.3)
@@ -122,7 +122,7 @@ class PerpendicularRoad(Scene):
         self.play(Write(lhs), FadeIn(fr))
         self.wait(1)
 
-        hint = Text("Flip it, then change the sign", font_size=24, color=YELLOW)
+        hint = Text("Flip it, then change the sign", font_size=28, color=YELLOW)
         hint.move_to(DOWN * 0.6 + RIGHT * CX)
         self.play(FadeIn(hint, shift=UP * 0.2))
         num, bar, den = fr
@@ -148,7 +148,7 @@ class PerpendicularRoad(Scene):
         # ------------------------------------------------------------------
         # Step 3: point-slope form with the point (1, 0) and m = -1/3
         # ------------------------------------------------------------------
-        cap = caption("Step 3: Point-slope form with (1, 0) and m = -1/3")
+        cap = caption("Step 3: Use point-slope form")
         self.play(FadeIn(cap, shift=UP * 0.2))
 
         gen = MathTex("y", "-", "y_1", "=", "m", "(", "x", "-", "x_1", ")").scale(1.3)
@@ -223,16 +223,16 @@ class PerpendicularRoad(Scene):
         self.wait(1)
 
         labels = VGroup(
-            MathTex("\\text{slope } m = -\\tfrac{1}{3}", color=GREEN).scale(0.8),
-            MathTex("\\text{y-intercept } b = \\tfrac{1}{3}", color=ORANGE).scale(0.8),
-        ).arrange(RIGHT, buff=0.6).move_to(STEP_POS + DOWN * 0.7)
+            MathTex("\\text{slope } m = -\\tfrac{1}{3}", color=GREEN).scale(0.95),
+            MathTex("\\text{y-intercept } b = \\tfrac{1}{3}", color=ORANGE).scale(0.95),
+        ).arrange(DOWN, buff=0.25).move_to(STEP_POS + DOWN * 0.95)
         self.play(FadeIn(labels, shift=UP * 0.2))
         self.wait(1.5)
 
         # ------------------------------------------------------------------
         # Step 6: check on the map -- graph the new road
         # ------------------------------------------------------------------
-        cap6 = caption("Step 6: Check it on the map")
+        cap6 = caption("Step 6: Check it on the map").shift(UP * 0.7)
         self.play(ReplacementTransform(cap5, cap6), FadeOut(labels))
 
         start = Dot(g(1, 0), color=YELLOW, radius=0.09)
@@ -241,8 +241,8 @@ class PerpendicularRoad(Scene):
         # rise first (down 1 for the negative slope), then run right 3
         rise2 = Line(g(1, 0), g(1, -1), color=GREEN, stroke_width=8)
         run2 = Line(g(1, -1), g(4, -1), color=GREEN, stroke_width=8)
-        rise2_lab = label_bg(Text("down 1", font_size=20, color=GREEN)).next_to(rise2, LEFT, buff=0.12).shift(DOWN * 0.1)
-        run2_lab = label_bg(Text("right 3", font_size=20, color=GREEN)).next_to(run2, DOWN, buff=0.12)
+        rise2_lab = label_bg(Text("down 1", font_size=26, color=GREEN)).next_to(g(1, -1), LEFT, buff=0.2)
+        run2_lab = label_bg(Text("right 3", font_size=26, color=GREEN)).next_to(run2, DOWN, buff=0.2)
         self.play(Create(rise2), Write(rise2_lab))
         self.play(Create(run2), Write(run2_lab))
 
@@ -254,8 +254,11 @@ class PerpendicularRoad(Scene):
         check = MathTex(
             "3", "\\cdot", "\\left(-\\tfrac{1}{3}\\right)", "=", "-1",
         ).scale(1.1)
-        check_cap = Text("Slopes multiply to -1, so the roads are perpendicular", font_size=22, color=YELLOW)
-        VGroup(check_cap, check).arrange(DOWN, buff=0.3).move_to(DOWN * 3.1 + RIGHT * CX)
+        check_cap = Text(
+            "Slopes multiply to -1,\nso the roads are perpendicular",
+            font_size=26, color=YELLOW,
+        )
+        VGroup(check_cap, check).arrange(DOWN, buff=0.3).move_to(DOWN * 2.85 + RIGHT * CX)
         self.play(FadeIn(check_cap, shift=UP * 0.2), Write(check))
 
         box = SurroundingRectangle(eq3, color=YELLOW, buff=0.2)
