@@ -20,6 +20,11 @@ new solution scene. The reference implementation is
 2. **One idea per step:** each step gets a blue caption ("Step 2: Add 3 to both
    sides") and the equation transforms with `TransformMatchingTex` so students
    see where each term goes.
+   **Caption size:** at least 28pt, and keep each caption under about 40
+   characters so it fits the column at that size. Move detail (like the point
+   or slope values) into the equation or a short hint line instead of a long
+   caption. Map and graph labels (rise/run, points) are at least 26pt with a
+   dark semi-transparent background so they read over busy pictures.
 3. **Distributing:** the multiplier (green copy) bounces in an arc over each term
    in the parentheses one at a time. Each landing flashes the term and shows a
    small product label ("2 · x = 2x") placed well above the equation, then
