@@ -13,8 +13,10 @@ new solution scene. The reference implementation is
   reporting done (overlaps and clipping are the usual bugs).
 
 ## Solution-building rules
-1. **Layout:** title at top, equation at `UP * 0.7`, blue step caption at a fixed
-   `STEP_POS = DOWN * 1.3`. Nothing animates into the title area. Hops, labels, and
+1. **Layout:** title at top, equation at about `UP * 0.7` to `UP * 0.9`, blue step
+   caption at a fixed spot about `DOWN * 1.8` to `DOWN * 1.9` (the road and
+   Algebra 1 scenes use these; the point-slope scene's older 0.7 / 1.3 also
+   works). Nothing animates into the title area. Hops, labels, and
    work written under the equation need clear space; never share a spot with the
    blue caption.
 2. **One idea per step:** each step gets a blue caption ("Step 2: Add 3 to both
@@ -27,8 +29,10 @@ new solution scene. The reference implementation is
    dark semi-transparent background so they read over busy pictures.
 3. **Distributing:** the multiplier (green copy) bounces in an arc over each term
    in the parentheses one at a time. Each landing flashes the term and shows a
-   small product label ("2 · x = 2x") placed well above the equation, then
-   fades. Then transform to the distributed form.
+   small product label ("2 · x = 2x") that fades. Put the label BELOW the
+   equation (the hopping copy travels above it, and tall fractions would push a
+   label above into the title or into the copy). Then transform to the
+   distributed form.
 4. **Inverse operations go on BOTH sides:** write the operation (red, e.g. "+3")
    under the left side and under the right side, then move both into the
    equation (`y - 3 + 3 = 2x - 2 + 3`). Never show it on one side only.
@@ -40,7 +44,9 @@ new solution scene. The reference implementation is
    orange = y-intercept/constants being combined, red = inverse operations and
    cancelling, blue = step captions.
 8. **Final answer:** color the slope (green) and the intercept (orange) in the
-   result and label them ("slope m = 2", "y-intercept b = 1").
+   result and label them ("slope m = 2", "y-intercept b = 1"). For a solved
+   value (like x = 12), color the answer green and finish with a yellow-boxed
+   "Answer" banner.
 
 ## Graph and slope rules
 9. **Graph as a check:** shrink the algebra into the top-left corner, then draw

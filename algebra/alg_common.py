@@ -26,7 +26,7 @@ def atitle(q, topic):
 def q_card(scene, q, hold=4):
     """Show the question exactly as printed on the test."""
     img = ImageMobject(f"algebra/q/q{q:02d}.png")
-    img.scale_to_fit_height(min(6.2, 6.2))
+    img.scale_to_fit_height(6.2)
     if img.width > 12.5:
         img.scale_to_fit_width(12.5)
     label = Text(f"Question {q}", font_size=30, color=CAP).to_edge(UP)
@@ -49,12 +49,12 @@ def next_cap(scene, cap, text):
     return new
 
 
-def check_step(scene, cap, lines, colors=None):
+def check_step(scene, cap, lines):
     """'Check it' step: a few MathTex lines under the work area."""
     new = acap("Check it with numbers")
     scene.play(ReplacementTransform(cap, new))
     grp = VGroup(*[MathTex(s).scale(0.95) for s in lines]).arrange(DOWN, buff=0.55).move_to(AEQ + UP * 0.1)
-    for i, m in enumerate(grp):
+    for m in grp:
         scene.play(Write(m), run_time=1.0)
     scene.wait(1.5)
     return new, grp
@@ -62,12 +62,13 @@ def check_step(scene, cap, lines, colors=None):
 
 def distribute(scene, eq, mult, targets, products, new_eq):
     """House-style distributing: the multiplier (green copy) bounces over each term
-    in the parentheses one at a time, flashing it and showing the product above."""
+    in the parentheses one at a time, flashing it and showing the product below the
+    equation (so it never collides with the hopping copy or the title)."""
     two = eq[mult].copy().set_color(GREEN)
     scene.add(two)
     for t, prod in zip(targets, products):
         scene.play(two.animate(path_arc=-PI * 0.8).move_to(eq[t].get_top() + UP * 0.9), run_time=0.9)
-        lab = MathTex(prod, color=GREEN).scale(0.9).move_to(eq.get_center() + UP * 1.5)
+        lab = MathTex(prod, color=GREEN).scale(0.9).next_to(eq, DOWN, buff=0.6)
         scene.play(Indicate(eq[t], color=GREEN), FadeIn(lab, shift=DOWN * 0.2))
         scene.wait(0.8)
         scene.play(FadeOut(lab))
@@ -103,7 +104,7 @@ def flip_slope(scene, n, d, pos=None, hint_pos=None, result_sign="-"):
     num_pos, den_pos = num.get_center(), den.get_center()
     scene.play(num.animate(path_arc=PI).move_to(den_pos), den.animate(path_arc=PI).move_to(num_pos), run_time=1.4)
     scene.wait(0.8)
-    new_lhs0 = MathTex("m_{\perp}").scale(1.3).move_to(lhs[0])
+    new_lhs0 = MathTex(r"m_{\perp}").scale(1.3).move_to(lhs[0])
     minus = MathTex(result_sign, color=GREEN).scale(1.5).next_to(fr, LEFT, buff=0.12).shift(RIGHT * 0.3)
     scene.play(ReplacementTransform(lhs[0], new_lhs0), fr.animate.shift(RIGHT * 0.3), Write(minus))
     scene.wait(1.5)
